@@ -11,7 +11,7 @@ const initialDice = 5
 io.on('connection', (socket) => {
     // auto-join room
 
-    autoJoin(socket)
+    // autoJoin(socket)
 
     socket.on('rules', (ack) => {
         ack(
