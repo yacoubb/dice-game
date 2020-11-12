@@ -1,7 +1,0 @@
-{
-	"port": 8080,
-	"serverAddress": "http://localhost",
-	"appId": "42873e75-ee18-4743-aab6-0f485319aa21",
-	"usernameMinLength": 3,
-	"usernameMaxLength": 20
-}
