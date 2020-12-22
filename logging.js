@@ -1,4 +1,4 @@
-module.exports = (logger, logErr, chalk) => {
+const logging = (logger, logErr, chalk) => {
     const stripAnsi = require('strip-ansi')
 
     const pad = (word, length) => {
@@ -76,3 +76,5 @@ module.exports = (logger, logErr, chalk) => {
 
     return { logClients, logRound, table }
 }
+
+export default logging

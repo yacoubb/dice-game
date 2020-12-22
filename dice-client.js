@@ -1,9 +1,11 @@
-module.exports = (...args) => {
+import logFactory from './logging'
+
+const client = (...args) => {
     const client = require('@yacoubb/socket.io-rooms').clientFactory(...args)
     const { socket, commands, callbacks, registerCommands, setLogger: parentSetLogger, logErrorCode: parentLogErrorCode, chalk } = client
     const { ERR_GAMESTARTED, ERR_GAMENOTSTARTED, ERR_NOTENOUGHPLAYERS, ERR_NOTYOURTURN, ERR_BADCALL, ERR_BADBLUFF } = require('./codes')
     var { logger, logErr } = client
-    var { logRound } = require('./logging')(logger, logErr, chalk)
+    var { logRound } = logFactory(logger, logErr, chalk)
 
     const dicegameCommands = {
         rules: {
@@ -141,7 +143,7 @@ module.exports = (...args) => {
     const setLogger = (newLogger, newLogErr) => {
         logger = newLogger
         logErr = newLogErr
-        logRound = require('./logging')(logger, logErr, chalk).logRound
+        logRound = logFactory(logger, logErr, chalk).logRound
         parentSetLogger(newLogger, newLogErr)
     }
 
@@ -173,3 +175,5 @@ module.exports = (...args) => {
 
     return { socket, commands, callbacks, registerCommands, setLogger, logger, logErr, logErrorCode, chalk }
 }
+
+export default client
