@@ -1,10 +1,10 @@
 const app = require('express')()
 const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer)
-const { port } = require('./config.json')
+const { serverAddress, port } = require('./config.json')
 const { ERR_GAMESTARTED, ERR_NOTENOUGHPLAYERS, ERR_GAMENOTSTARTED, ERR_BADCALL, ERR_NOTYOURTURN, ERR_BADBLUFF } = require('./codes')
 
-const { roomOf, playersOf, autoJoin } = require('@yacoubb/socket.io-rooms').toRoomServer(io, require('./config-template.json'))
+const { roomOf, playersOf, autoJoin } = require('@yacoubb/socket.io-rooms').toRoomServer(io, require('./config.json'))
 
 const initialDice = 5
 
@@ -182,6 +182,6 @@ const startTurn = (room) => {
     })
 }
 
-httpServer.listen(port, 'localhost', () => {
-    console.log(`dicegame server listening on port ${port}`)
+httpServer.listen(port, serverAddress, () => {
+    console.log(`dicegame server listening at ${serverAddress}:${port}`)
 })
